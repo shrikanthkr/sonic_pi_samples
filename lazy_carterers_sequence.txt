@@ -1,0 +1,50 @@
+# Welcome to Sonic Pi v2.9
+use_synth :beep
+
+in_thread do
+  loop do
+    cue :tick
+    sleep 1
+  end
+end
+
+
+in_thread do
+  loop do
+    cue :half_tick
+    sleep 0.5
+  end
+end
+
+
+in_thread do
+  loop do
+    sync :tick
+    sample :drum_heavy_kick, amp: 20
+  end
+end
+
+in_thread do
+  loop do
+    sync :half_tick
+    sample :drum_bass_soft, amp: 2
+    
+  end
+end
+in_thread do
+  loop do
+    sample :bass_dnb_f
+    sleep 5
+  end
+end
+
+n = 0
+loop do
+  n = n + 1
+  p = ( (n * n) + n + 2) / 2
+  play (p % 60) + 60, release: 0.50
+  if(n >= 65536)
+    n = 1
+  end
+  sleep 0.25
+end
